@@ -13,6 +13,11 @@
         android:theme="@style/Theme.Tasks"
         tools:targetApi="31">
         <activity
+            android:name=".ExerciseActivity"
+            android:exported="false"
+            android:label="@string/title_activity_excercise"
+            android:theme="@style/Theme.Tasks" />
+        <activity
             android:name=".ComposablesActivity"
             android:exported="false"
             android:label="@string/title_activity_composables"
