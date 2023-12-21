@@ -132,7 +132,7 @@ class ComposablesActivity : ComponentActivity() {
             //LazyColumnExcercise1()
             //LazyRowExcerise()
             //LazyColumnAndRowExcercise()
-            LazyGridExcercise()
+            //LazyGridExcercise()
         }
     }
 

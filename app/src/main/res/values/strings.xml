@@ -3,4 +3,5 @@
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_composables">Composables</string>
     <string name="title_activity_excercise">ExcerciseActivity</string>
+    <string name="title_activity_task">TaskActivity</string>
 </resources>
