@@ -46,19 +46,27 @@ class HomeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //obsługa task jest null
-        val task = intent.getSerializableExtra("task") as? Task
-
-        //wyświetla wiadomość a w niej zawartość przesłanego elementu
-//        task?.let{
-//            Toast.makeText(this, "task: $task", Toast.LENGTH_LONG).show()
-//        }
-        task?.let {
-            taskList.add(it)
-        }
+        addTaskToList(intent)
 
         setContent {
             HomeView()
+        }
+    }
+
+    //funkcja wywolywana gdy przechodzę do tego okna przyciskiem wstecz na telefonie
+    //jeżeli nie dodam tutaj taska do listy, wyświetli puste okno (gdybym zapisywał listę, wyświetli starą listę bez nowego taska)
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        intent?.let { addTaskToList(intent) }
+    }
+
+    private fun addTaskToList(intent: Intent)
+    {
+        //obsługa task jest null
+        val task = intent.getSerializableExtra("task") as? Task
+        //dodaje task tylko wtedy gdy task nie jest null
+        task?.let {
+            taskList.add(it)
         }
     }
 
@@ -71,14 +79,16 @@ class HomeActivity : ComponentActivity() {
             if (taskList.isNotEmpty())
                 LazyColumnArea()
             else
-                Box(contentAlignment = Alignment.Center,
-                    modifier = Modifier.fillMaxSize()){
-                    Text(text = "Task list is empty")
-                }
+                Text(text = "Task list is empty",
+                    modifier = Modifier.align(Alignment.Center)
+                    )
 
         FloatingActionButton(onClick = {
                 val intent: Intent = Intent(context, TaskActivity::class.java)
                 startActivity(intent)
+                //finish()    //zamyka to okno po przejściu do nowego; nie chcę go zamykać, tylko schować
+            //żeby po kliknięciu na wstecz w telefonie apka tam się otworzyła
+
             }, modifier = Modifier
             .padding(10.dp)
             .align(Alignment.BottomEnd)

@@ -3,6 +3,7 @@ package marek.kurs.android.tasks
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
@@ -69,7 +70,11 @@ class TaskActivity : ComponentActivity() {
                      colour = taskColor.value)
                 val intent: Intent = Intent(context, HomeActivity::class.java)
                 intent.putExtra( "task", t)
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)  //nie zamknąłem Home, teraz tam wracam
                 startActivity(intent)
+                finish()    //zamyka to okno po przejściu do nowego
+
+                Log.d("taskActivity", "utworzony tas")
                              },
 
                 modifier = Modifier.fillMaxWidth()
